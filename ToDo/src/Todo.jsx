@@ -14,7 +14,7 @@ export default function Todo()
     },[])
     const handleDataRetreival = async() =>
     {
-        const result=await axios.get('http://localhost:4000/dataretreival')
+        const result=await axios.get('/dataretreival')
         result.data.r1.forEach((element)=>{addTask(t=>[...t,element.tasks])})
         result.data.r2.forEach((element)=>{addCompletedTask(t=>[...t,element.tasks])})
     }
@@ -25,7 +25,7 @@ export default function Todo()
         {
             addTask(t=>([...t,Task]))
             try {
-                await axios.post('http://localhost:4000/addTask',{Task})
+                await axios.post('/addTask',{Task})
             } catch (error) { 
             }
         }
@@ -39,7 +39,7 @@ export default function Todo()
         addCompletedTask(c=>[...c,CompletedTask])
         addTask(t=>t.filter((_,i)=>i!=index))
         try {
-            await axios.post('http://localhost:4000/completedTask',{CompletedTask})
+            await axios.post('/completedTask',{CompletedTask})
         } catch (error) { 
         }
     }
@@ -50,7 +50,7 @@ export default function Todo()
         addTask(t=>[...t,IncompleteTask])
         addCompletedTask(c=>c.filter((_,i)=>i!=index))
         try {
-            await axios.post('http://localhost:4000/incompleteTask',{IncompleteTask})
+            await axios.post('/incompleteTask',{IncompleteTask})
         } catch (error) { 
         }
     }
@@ -60,7 +60,7 @@ export default function Todo()
         const t=CompletedTasks.filter((_,i)=>i==index).toString();
         addCompletedTask(c=>c.filter((_,i)=>i!=index))
         try {
-            await axios.post('http://localhost:4000/deleteCTask',{t})
+            await axios.post('/deleteCTask',{t})
         } catch (error) { 
         }
     }
@@ -69,7 +69,7 @@ export default function Todo()
         const t=Tasks.filter((_,i)=>i==index).toString()
         addTask(c=>c.filter((_,i)=>i!=index))
         try {
-            await axios.post('http://localhost:4000/deleteTask',{t})
+            await axios.post('/deleteTask',{t})
         } catch (error) { 
         }
     }
